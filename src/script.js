@@ -8,7 +8,11 @@ const noteColor = 'dark';
 
 const getNotes = function () {
   const notesArrLs = JSON.parse(localStorage.getItem('notes') || []);
-  return notesArrLs;
+  // sortowanie przypiętych notatek
+  const notePinSort = notesArrLs.sort((a, b) => {
+    return a.pin - b.pin;
+  });
+  return notePinSort;
 };
 
 const displayNotes = function (notes) {
@@ -74,6 +78,7 @@ const createOrUpdateNote = function (noteToUpdate) {
 };
 
 const saveNote = function (id) {
+  const allNotes = document.querySelectorAll('.note');
   const noteToSave = document.querySelector(`[data-id="${id}"]`);
   const noteTitle = document.getElementById(`note-title-${id}`);
   const noteContent = document.getElementById(`note-content-${id}`);
@@ -81,12 +86,6 @@ const saveNote = function (id) {
   const currentColor = noteToSave.classList.contains('light')
     ? 'light'
     : 'dark';
-  console.log(
-    noteTitle.value,
-    noteContent.value,
-    notePin.checked,
-    currentColor
-  );
 
   createOrUpdateNote({
     id: id,
@@ -95,6 +94,9 @@ const saveNote = function (id) {
     color: currentColor,
     pin: notePin.checked,
   });
+
+  allNotes.forEach(note => note.remove());
+  displayNotes(getNotes());
 };
 
 const deleteNote = function (id) {
