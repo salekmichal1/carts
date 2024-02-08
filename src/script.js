@@ -4,7 +4,9 @@ const notesContainer = document.querySelector('.notes-container');
 const addButton = document.querySelector('.options__add-btn');
 const titleInput = document.querySelector('.note__title');
 
-const noteColor = 'dark';
+if (localStorage.getItem('notes') === null) {
+  localStorage.setItem('notes', JSON.stringify([]));
+}
 
 const getNotes = function () {
   const notesArrLs = JSON.parse(localStorage.getItem('notes') || []);

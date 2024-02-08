@@ -107,6 +107,10 @@ body {
   font-size: 16px;
 }
 
+.pined {
+  transform: translateY(2px);
+}
+
 .note__date {
   margin-top: 10px;
 }
