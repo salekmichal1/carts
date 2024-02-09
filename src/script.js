@@ -4,7 +4,10 @@ const notesContainer = document.querySelector('.notes-container');
 const addButton = document.querySelector('.options__add-btn');
 const titleInput = document.querySelector('.note__title');
 
-if (localStorage.getItem('notes') === null) {
+if (
+  localStorage.getItem('notes') === null ||
+  localStorage.getItem('cities') === ''
+) {
   localStorage.setItem('notes', JSON.stringify([]));
 }
 
